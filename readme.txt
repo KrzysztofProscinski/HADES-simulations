@@ -1,14 +1,15 @@
 macros:
-- rootlogon.C			- makro executed during launching of the root; it loads Pluto libraries and executes PHadesAcc.C macro; for working it needs the acc_matrices.root file
-- PHadesAcc.C			- makro for cuts and smearing for chosen particles, by default for e+ e-
+- rootlogon.C			- macro executed during launching of the root; it loads Pluto libraries and executes PHadesAcc.C macro; for working it needs the file "acc_matrices.root"
+- accmatrices_create.C  - macro used for creations of acceptance matrices in the file "acc_matrices.root"
+- PHadesAcc.C			- macro for cuts and smearing for chosen particles, by default for e+ e-
 - ppomega1.C			- simulation of the 1st reaction with omega
 - ppomega2.C			- simulation of the 2nd reaction with omega
-- ppeta1.C			- simulation of the 1st reaction with eta
-- ppeta2.C			- simulation of the 2nd reaction with eta
-- ppetap1.C			- simulation of the 1st reaction with eta'
-- ppetap2.C			- simulation of the 2nd reaction with eta'
-- ppa1.C			- simulation of the 1st reaction with a0+
-- ffomega.C			- simulation of form factor of meson omega
+- ppeta1.C			    - simulation of the 1st reaction with eta
+- ppeta2.C			    - simulation of the 2nd reaction with eta
+- ppetap1.C	    		- simulation of the 1st reaction with eta'
+- ppetap2.C		    	- simulation of the 2nd reaction with eta'
+- ppa1.C	    		- simulation of the 1st reaction with a0+
+- ffomega.C		    	- simulation of form factor of meson omega
 - cpdistribution.C		- obtaining distribution needed for CP violation checking for the predicted experimental statistic (rejection sampling method)
 - ffdistribution.C		- obtaining form factor distribution for the predicted experimental statistic (rejection sampling method)
 - loop.C, loop.h		- drawing histograms from the simulation of the 1st reaction with omega
@@ -55,3 +56,4 @@ remarks:
 - for executing the "ffomega.C" macro, cuts must be applied on particles: e+, e-, g; otherwise the results will be incorrect
 - the macro "cpdistribution.C" relies on a distribution from the file "eta2cp.root", which has to be created by the macro "loopeta2.C"
 - the macro "ffdistribution.C" relies on distributions from the file "ffppomega.root", which has to be created by the macro "ffdistribution.C"
+- acceptance matrices are stored in the file "acc_matrices.root" and can be obtained from the file "sum_omega.root" by the macro "accmatrices_create.C"
