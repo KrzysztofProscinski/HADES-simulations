@@ -1,7 +1,7 @@
 macros:
 - rootlogon.C			- macro executed during launching of the root; it loads Pluto libraries and executes PHadesAcc.C macro; for working it needs the file "acc_matrices.root"
 - accmatrices_create.C  - macro used for creations of acceptance matrices in the file "acc_matrices.root"
-- PHadesAcc.C			- macro for cuts and smearing for chosen particles, by default for e+ e-
+- PHadesAcc.C			- macro for applying acceptances, cuts and smearing for chosen particles
 - ppomega1.C			- simulation of the 1st reaction with omega
 - ppomega2.C			- simulation of the 2nd reaction with omega
 - ppeta1.C			    - simulation of the 1st reaction with eta
