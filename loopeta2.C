@@ -50,19 +50,22 @@ void loopeta2::Loop()
 
 // attention: here you can choose if you want to draw a histogram of the CP symmetry violation with 2 or with 20 bins
 // 2 bins:
-/*	TH1F *hcp = new TH1F("hcp","CP symmetry violation;sin(#theta_{e #pi})cos(#theta_{e #pi});Counts",2,-0.5,0.5);
-//	TH1F *hcp2a = new TH1F("hcp2a","CP symmetry violation",1,0.,0.5);
-//	TH1F *hcp2b = new TH1F("hcp2b","CP symmetry violation",1,0.,0.5);*/
+	TH1F *hcp2 = new TH1F("hcp2","CP symmetry violation;sin(#theta_{e #pi})cos(#theta_{e #pi});Counts",2,-0.5,0.5);
+	TH1F *hcp2a = new TH1F("hcp2a","CP symmetry violation",1,0.,0.5);
+	TH1F *hcp2b = new TH1F("hcp2b","CP symmetry violation",1,0.,0.5);
 // 20 bins:
 	TH1F *hcp = new TH1F("hcp","CP symmetry violation;sin(#theta_{e #pi})cos(#theta_{e #pi});Counts",20,-0.5,0.5);
-		hcp->SetMinimum(0);
-	TH1F *hcp2a = new TH1F("hcp2a","CP symmetry violation",10,0.,0.5);
-	TH1F *hcp2b = new TH1F("hcp2b","CP symmetry violation",10,0.,0.5);
+	TH1F *hcpa = new TH1F("hcpa","CP symmetry violation",10,0.,0.5);
+	TH1F *hcpb = new TH1F("hcpb","CP symmetry violation",10,0.,0.5);
 
-//	TH1F *hcp2alt = new TH1F("hcp2alt","CP symmetry violation",20,-1.,1.);
+	TH1F *hcpalt = new TH1F("hcp2alt","CP symmetry violation",20,-1.,1.);
 
+	hcp->SetMinimum(0);
+	hcpa->SetLineColor(4);
+	hcpb->SetLineColor(2);
 	hcp2a->SetLineColor(4);
 	hcp2b->SetLineColor(2);
+
 
 // a loop
 
@@ -87,6 +90,7 @@ void loopeta2::Loop()
 	cos_etalab->Fill(cosnlab,w);
 	rap_eta->Fill(rap,w);
 	hcp->Fill(cp);
+	hcp2->Fill(cp);
 	hm_ee->Fill(minvee,w);
 	hm_eepipi->Fill(minveepipi,w);
 	hm_eepp->Fill(minveepp,w);
@@ -101,21 +105,21 @@ void loopeta2::Loop()
 
 
 // filling histograms for the CP violation where we check symmetry with respect to 0 (version for 2 bins)
-/*for(Int_t i=1;i<2; i++)
+for(Int_t i=1;i<2; i++)
 {		
-	Int_t binh1 = hcp->GetBinContent(i+1);
+	Int_t binh1 = hcp2->GetBinContent(i+1);
 		hcp2a->SetBinContent(i, binh1);
-	Int_t binh2 = hcp->GetBinContent(i);
+	Int_t binh2 = hcp2->GetBinContent(i);
 		hcp2b->SetBinContent(i, binh2);
-}*/
+}
 
 // filling histograms for CP violation where we check symmetry with respect to 0(version for 20 bins)
 for(Int_t i=1;i<11; i++)
 {		
 	Int_t binh1 = hcp->GetBinContent(i+10);
-		hcp2a->SetBinContent(i, binh1);
+		hcpa->SetBinContent(i, binh1);
 	Int_t binh2 = hcp->GetBinContent(11-i);
-		hcp2b->SetBinContent(i, binh2);
+		hcpb->SetBinContent(i, binh2);
 }
 
 
@@ -130,20 +134,27 @@ for(Int_t i=1;i<=900; i++)
 		if(bin3!=0){rap_eta->SetBinError(i, TMath::Sqrt(bin3));}
 	Int_t bin4 = hcp->GetBinContent(i);
 		if(bin4!=0){hcp->SetBinError(i, TMath::Sqrt(bin4));}
-	Int_t bin5 = hm_ee->GetBinContent(i);
-		if(bin5!=0){hm_ee->SetBinError(i, TMath::Sqrt(bin5));}
-	Int_t bin6 = hm_eepipi->GetBinContent(i);
-		if(bin6!=0){hm_eepipi->SetBinError(i, TMath::Sqrt(bin6));}
-	Int_t bin7 = hm_eepp->GetBinContent(i);
-		if(bin7!=0){hm_eepp->SetBinError(i, TMath::Sqrt(bin7));}
-	Int_t bin8 = hm_pipi->GetBinContent(i);
-		if(bin8!=0){hm_pipi->SetBinError(i, TMath::Sqrt(bin8));}
-	Int_t bin9 = hm_pp->GetBinContent(i);
-		if(bin9!=0){hm_pp->SetBinError(i, TMath::Sqrt(bin9));}
-	Int_t bin10 = hcp2a->GetBinContent(i);
-		if(bin10!=0){hcp2a->SetBinError(i, TMath::Sqrt(bin10));}
-	Int_t bin11 = hcp2b->GetBinContent(i);
-		if(bin11!=0){hcp2b->SetBinError(i, TMath::Sqrt(bin11));}
+	Int_t bin5 = hcp2->GetBinContent(i);
+		if(bin5!=0){hcp2->SetBinError(i, TMath::Sqrt(bin5));}
+	Int_t bin6 = hm_ee->GetBinContent(i);
+		if(bin6!=0){hm_ee->SetBinError(i, TMath::Sqrt(bin6));}
+	Int_t bin7 = hm_eepipi->GetBinContent(i);
+		if(bin7!=0){hm_eepipi->SetBinError(i, TMath::Sqrt(bin7));}
+	Int_t bin8 = hm_eepp->GetBinContent(i);
+		if(bin8!=0){hm_eepp->SetBinError(i, TMath::Sqrt(bin8));}
+	Int_t bin9 = hm_pipi->GetBinContent(i);
+		if(bin9!=0){hm_pipi->SetBinError(i, TMath::Sqrt(bin9));}
+	Int_t bin10 = hm_pp->GetBinContent(i);
+		if(bin10!=0){hm_pp->SetBinError(i, TMath::Sqrt(bin10));}
+	Int_t bin11 = hcpa->GetBinContent(i);
+		if(bin11!=0){hcpa->SetBinError(i, TMath::Sqrt(bin11));}
+	Int_t bin12 = hcpb->GetBinContent(i);
+		if(bin12!=0){hcpb->SetBinError(i, TMath::Sqrt(bin12));}
+	Int_t bin13 = hcp2a->GetBinContent(i);
+		if(bin13!=0){hcp2a->SetBinError(i, TMath::Sqrt(bin13));}
+	Int_t bin14 = hcp2b->GetBinContent(i);
+		if(bin14!=0){hcp2b->SetBinError(i, TMath::Sqrt(bin14));}
+
 }
 
 // drawing of the chosen histogram
@@ -157,15 +168,18 @@ for(Int_t i=1;i<=900; i++)
 //	cos_etalab->Draw();
 //	rap_eta->Draw();
 	hcp->Draw();
+	hcp2->Draw();
 //	hm_ee->Draw();
 //	hm_eepipi->Draw();
 //	hm_eepp->Draw();
 //	hm_pipi->Draw();
 //	hm_pp->Draw();
+//	hcpa->Draw();
+//	hcpb->Draw("same");
 //	hcp2a->Draw();
 //	hcp2b->Draw("same");
 
-// saving the hcp in a .root file; this is needed if you want to use this histogram as a distribution, e.g. for obtaining histogram for the experimental statistics
+// saving the hcp in a .root file; this is needed if you want to use this histogram as a distribution for obtaining histogram for the experimental statistics
 /*	TFile *out = new TFile("eta2cp.root","recreate");
 	out->cd();
 	hcp->Write();
