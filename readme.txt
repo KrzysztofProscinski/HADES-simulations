@@ -9,6 +9,8 @@ macros:
 - ppetap2.C			- simulation of the 2nd reaction with eta'
 - ppa1.C			- simulation of the 1st reaction with a0+
 - ffomega.C			- simulation of form factor of meson omega
+- cpdistribution.C		- obtaining distribution needed for CP violation checking for the predicted experimental statistic (rejection sampling method)
+- ffdistribution.C		- obtaining form factor distribution for the predicted experimental statistic (rejection sampling method)
 - loop.C, loop.h		- drawing histograms from the simulation of the 1st reaction with omega
 - loop2.C, loop2.h		- drawing histograms from the simulation of the 2nd reaction with omega
 - loopeta.C, loopeta.h		- drawing histograms from the simulation of the 1st reaction with eta
@@ -51,3 +53,5 @@ remarks:
 - to draw another histogram in macro for drawing histograms one have to uncomment certain line in the end of the macro and comment out the line for previously drawn histogram
 - to inspect content of .root files one have to write a command "new TBrowser" in the terminal
 - for executing the "ffomega.C" macro, cuts must be applied on particles: e+, e-, g; otherwise the results will be incorrect
+- the macro "cpdistribution.C" relies on a distribution from the file "eta2cp.root", which can be created by the macro "loopeta2.C"
+- the macro "ffdistribution.C" relies on distributions from the file "ffppomega.root", which can be created by the macro "ffdistribution.C"
